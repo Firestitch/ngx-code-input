@@ -1,0 +1,31 @@
+code-input {
+  --item-spacing: 10px;
+  --item-height: 20px;
+  --item-border: none;
+  --item-border-bottom: 2px solid #949494;
+  --item-border-has-value: none;
+  --item-border-bottom-has-value: 2px solid #949494;
+  --item-border-focused: none;
+  --item-border-bottom-focused: 2px solid #0061AF;
+  --item-shadow-focused: none;
+  --item-border-radius: 0px;
+  
+  ::ng-deep {
+
+    span {
+      &:first-child {
+        padding-left: 0 !important;
+      }
+
+      &:last-child {
+        padding-right: 0 !important;
+      }
+    }
+    
+    input {
+      font-size: 20px !important;
+      height: 40px !important;
+      padding: 0 !important;
+    }  
+  }
+}

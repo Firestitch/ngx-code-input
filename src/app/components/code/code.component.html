@@ -1,0 +1,8 @@
+<code-input
+  [initialFocusField]="0"
+  [codeLength]="codeLength"
+  [code]="code"
+  [isPrevFocusableAfterClearing]="false"
+  (codeCompleted)="completed.emit($event)"
+  (codeChanged)="changed.emit($event)">
+</code-input>

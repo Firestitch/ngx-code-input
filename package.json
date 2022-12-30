@@ -1,11 +1,11 @@
 {
-  "name": "@firestitch/share",
-  "title": "Share",
-  "description": "@firestitch/share",
-  "version": "12.3.2",
+  "name": "@firestitch/code",
+  "title": "Code",
+  "description": "@firestitch/code",
+  "version": "12.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Firestitch/ngx-share"
+    "url": "https://github.com/Firestitch/ngx-code"
   },
   "author": {
     "name": "Firestitch",
@@ -75,6 +75,6 @@
   },
   "dependencies": {
     "tslib": "^2.0.0",
-    "ngx-device-detector": "^2.1.0"
+    "angular-code-input": "^1.5.0"
   }
 }
