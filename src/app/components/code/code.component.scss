@@ -1,6 +1,6 @@
-code-input {
+:host {
   --item-spacing: 10px;
-  --item-height: 20px;
+  --item-height: 40px;
   --item-border: none;
   --item-border-bottom: 2px solid #949494;
   --item-border-has-value: none;
@@ -9,23 +9,62 @@ code-input {
   --item-border-bottom-focused: 2px solid #0061AF;
   --item-shadow-focused: none;
   --item-border-radius: 0px;
-  
-  ::ng-deep {
+  --text-security-type: disc;
+  --item-background: transparent;
+  --item-font-weight: 300;
+  --color: #171516;
 
-    span {
-      &:first-child {
-        padding-left: 0 !important;
-      }
+  display: flex;
+  transform: translate3d(0, 0, 0);
+  font-size: inherit;
+  color: var(--color);
 
-      &:last-child {
-        padding-right: 0 !important;
-      }
+  span {
+    display: block;
+    flex: 1;
+    padding-right: var(--item-spacing);
+
+    &:first-child {
+      padding-left: 0;
     }
-    
-    input {
-      font-size: 20px !important;
-      height: 40px !important;
-      padding: 0 !important;
-    }  
+
+    &:last-child {
+      padding-right: 0;
+    }
+
+    &.code-hidden input {
+      text-security: var(--text-security-type);
+      -webkit-text-security: var(--text-security-type);
+      -moz-text-security: var(--text-security-type);
+    }
+  }
+
+  input {
+    padding: 0 !important;
+    width: 100%;
+    height: var(--item-height);
+    color: inherit;
+    background: var(--item-background);
+    text-align: center;
+    font-size: 20px;
+    font-weight: var(--item-font-weight);
+    border: var(--item-border);
+    border-bottom: var(--item-border-bottom);
+    border-radius: var(--item-border-radius);
+    -webkit-appearance: none;
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    outline: none;
+
+    &.has-value {
+      border: var(--item-border-has-value);
+      border-bottom: var(--item-border-bottom-has-value);
+    }
+
+    &:focus {
+      border: var(--item-border-focused);
+      border-bottom: var(--item-border-bottom-focused);
+      box-shadow: var(--item-shadow-focused);
+    }
   }
 }

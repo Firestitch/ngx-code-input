@@ -8,7 +8,6 @@ import { FsExampleModule } from '@firestitch/example';
 import { FsMessageModule } from '@firestitch/message';
 import { FsCodeModule } from '@firestitch/package';
 import { FsLabelModule } from '@firestitch/label';
-import { FsColorPickerModule } from '@firestitch/colorpicker';
 import { ToastrModule } from 'ngx-toastr';
 
 import { AppMaterialModule } from './material.module';
@@ -31,15 +30,11 @@ const routes: Routes = [
     AppMaterialModule,
     FormsModule,
     FsLabelModule,
-    FsColorPickerModule,
     FsCodeModule,
     FsExampleModule.forRoot(),
     FsMessageModule.forRoot(),
     ToastrModule.forRoot({ preventDuplicates: true }),
     RouterModule.forRoot(routes),
-  ],
-  entryComponents: [
-    KitchenSinkConfigureComponent
   ],
   declarations: [
     AppComponent,

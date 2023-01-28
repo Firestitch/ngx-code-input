@@ -7,7 +7,5 @@
   "whitelistedNonPeerDependencies": [
     "."
   ],
-  "allowedNonPeerDependencies": [
-    "angular-code-input"
-  ]
+  "allowedNonPeerDependencies": []
 }

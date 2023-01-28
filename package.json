@@ -1,11 +1,11 @@
 {
-  "name": "@firestitch/code",
-  "title": "Code",
-  "description": "@firestitch/code",
+  "name": "@firestitch/code-input",
+  "title": "Code Input",
+  "description": "@firestitch/code-input",
   "version": "12.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Firestitch/ngx-code"
+    "url": "https://github.com/Firestitch/ngx-code-input"
   },
   "author": {
     "name": "Firestitch",
@@ -40,23 +40,31 @@
     "@angular/platform-browser-dynamic": "^12.2.13",
     "@angular/router": "^12.2.13",
     "@compodoc/compodoc": "^1.1.16",
-    "@firestitch/api": "^8.1.10",
-    "@firestitch/clear": "^8.1.0",
-    "@firestitch/colorpicker": "^10.0.3",
-    "@firestitch/common": "^8.0.11",
-    "@firestitch/drawer": "^9.2.7",
-    "@firestitch/example": "^9.1.0",
-    "@firestitch/iframe": "^10.0.4",
-    "@firestitch/label": "^8.2.10",
-    "@firestitch/menu": "^9.1.12",
-    "@firestitch/message": "^8.2.2",
-    "@firestitch/store": "^8.1.2",
-    "classlist.js": "^1.1.20150312",
+    "@firestitch/api": "^12.2.4",
+    "@firestitch/autocomplete": "^12.1.1",
+    "@firestitch/autocomplete-chips": "^12.4.1",
+    "@firestitch/clear": "^12.2.1",
+    "@firestitch/common": "^12.5.1",
+    "@firestitch/core": "^12.0.3",
+    "@firestitch/date": "^12.4.1",
+    "@firestitch/datepicker": "^12.10.0",
+    "@firestitch/dialog": "^12.2.1",
+    "@firestitch/drawer": "^12.1.0",
+    "@firestitch/example": "^12.0.0",
+    "@firestitch/file": "^12.9.6",
+    "@firestitch/iframe": "^12.0.0",
+    "@firestitch/label": "^12.0.0",
+    "@firestitch/menu": "^12.2.0",
+    "@firestitch/message": "^12.2.1",
+    "@firestitch/popover": "^12.1.2",
+    "@firestitch/prompt": "^12.0.1",
+    "@firestitch/scroll-picker": "^12.0.0",
+    "@firestitch/store": "^12.1.1",
     "codelyzer": "^6.0.0",
-    "color": "^4.0.2",
     "core-js": "2.6.9",
     "cpx": "^1.5.0",
     "date-fns": "^2.14.0",
+    "date-fns-tz": "^1.3.7",
     "hammerjs": "^2.0.8",
     "lodash-es": "^4.17.15",
     "ng-packagr": "^12.2.5",
@@ -67,14 +75,12 @@
     "tslint": "~6.1.0",
     "typescript": "4.2.4",
     "url-polyfill": "^1.1.7",
-    "zone.js": "~0.11.4",
-    "hex-to-css-filter": "^5.2.0"
+    "zone.js": "~0.11.4"
   },
   "engines": {
     "node": ">=6.0.0"
   },
   "dependencies": {
-    "tslib": "^2.0.0",
-    "angular-code-input": "^1.5.0"
+    "tslib": "^2.0.0"
   }
 }

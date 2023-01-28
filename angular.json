@@ -21,15 +21,16 @@
             "assets": [
               "playground/favicon.ico",
               "playground/assets",
-              { 
-                "glob": "**/*", 
-                "input": "./src/app/assets", 
-                "output": "./assets/@firestitch/share" 
+              {
+                "glob": "**/*",
+                "input": "./src/app/assets",
+                "output": "./assets/@firestitch/share"
               }
             ],
             "styles": [
               "playground/styles.scss"
             ],
+            "allowedCommonJsDependencies": [ "date-fns-tz" ],
             "scripts": [],
             "vendorChunk": true,
             "extractLicenses": false,

@@ -4,25 +4,18 @@ import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 
-import { FsCodeComponent } from './components/code/code.component';
-
-import { CodeInputModule } from 'angular-code-input';
+import { FsCodeInputComponent } from './components/code/code.component';
 
 
 @NgModule({
   imports: [
     CommonModule,
-
-    MatDialogModule,
-    MatButtonModule,
-
-    CodeInputModule,
   ],
   exports: [
-    FsCodeComponent,
+    FsCodeInputComponent,
   ],
   declarations: [
-    FsCodeComponent,
+    FsCodeInputComponent,
   ],
 })
 export class FsCodeModule {}
