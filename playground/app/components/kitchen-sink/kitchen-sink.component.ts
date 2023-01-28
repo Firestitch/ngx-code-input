@@ -1,9 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { KitchenSinkConfigureComponent } from '../kitchen-sink-configure';
 import { FsExampleComponent } from '@firestitch/example';
 import { FsMessage } from '@firestitch/message';
-import { ShareConfig } from 'src/app/interfaces';
-import { ShareEvent } from 'src/app/interfaces/share-event.interface';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 

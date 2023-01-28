@@ -32,7 +32,7 @@ const routes: Routes = [
     FormsModule,
     FsLabelModule,
     FsColorPickerModule,
-    FsCodeModule.forRoot(),
+    FsCodeModule,
     FsExampleModule.forRoot(),
     FsMessageModule.forRoot(),
     ToastrModule.forRoot({ preventDuplicates: true }),

@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MatDialogModule } from '@angular/material/dialog';
@@ -25,10 +25,4 @@ import { CodeInputModule } from 'angular-code-input';
     FsCodeComponent,
   ],
 })
-export class FsCodeModule {
-  static forRoot(): ModuleWithProviders<FsCodeModule> {
-    return {
-      ngModule: FsCodeModule
-    };
-  }
-}
+export class FsCodeModule {}
