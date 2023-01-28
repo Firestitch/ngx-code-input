@@ -24,15 +24,15 @@ import {
 
 import { Subject, Subscription } from 'rxjs';
 
-import { InputState } from '../../enum/input-state';
+import { CodeInputState } from '../../enum/code-input-state';
 import { CodeInputConfig } from '../../interfaces/code-input-config.interface';
 import { FsCodeInputConfigToken } from '../../tokens/code-input-config.token';
 
 
 @Component({
   selector: 'fs-code-input',
-  templateUrl: './code.component.html',
-  styleUrls: ['./code.component.scss'],
+  templateUrl: './code-input.component.html',
+  styleUrls: ['./code-input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{
     provide: NG_VALUE_ACCESSOR,
@@ -87,7 +87,7 @@ export class FsCodeInputComponent
   private _onTouch: any = () => {}
   private _code = null;
   private _inputs: HTMLInputElement[] = [];
-  private _inputsStates: InputState[] = [];
+  private _inputsStates: CodeInputState[] = [];
   private _inputsListSubscription !: Subscription;
   private _codeLength !: number;
   private _state = {
@@ -221,7 +221,7 @@ export class FsCodeInputComponent
       e.preventDefault();
       e.stopPropagation();
       this.setInputValue(target, null);
-      this.setStateForInput(target, InputState.reset);
+      this.setStateForInput(target, CodeInputState.reset);
       return;
     }
 
@@ -273,7 +273,7 @@ export class FsCodeInputComponent
       // Cancel the loop when a value cannot be used
       if (!this.canInputValue(val)) {
         this.setInputValue(input, null);
-        this.setStateForInput(input, InputState.reset);
+        this.setStateForInput(input, CodeInputState.reset);
         return;
       }
 
@@ -379,7 +379,7 @@ export class FsCodeInputComponent
     if (list.length > this._inputs.length) {
       const inputsToAdd = list.filter((item, index) => index > this._inputs.length - 1);
       this._inputs.splice(this._inputs.length, 0, ...inputsToAdd.map(item => item.nativeElement));
-      const states = Array(inputsToAdd.length).fill(InputState.ready);
+      const states = Array(inputsToAdd.length).fill(CodeInputState.ready);
       this._inputsStates.splice(this._inputsStates.length, 0, ...states);
     }
     else if (list.length < this._inputs.length) {
@@ -447,9 +447,9 @@ export class FsCodeInputComponent
     return new Promise<boolean>((resolve) => {
       setTimeout(() => {
         const input = e.target;
-        const isReset = this.getStateForInput(input) === InputState.reset;
+        const isReset = this.getStateForInput(input) === CodeInputState.reset;
         if (isReset) {
-          this.setStateForInput(input, InputState.ready);
+          this.setStateForInput(input, CodeInputState.ready);
         }
         // if backspace key pressed the caret will have position 0 (for single value field)
         resolve(input.selectionStart === 0 && !isReset);
@@ -488,7 +488,7 @@ export class FsCodeInputComponent
     return isDigitsValue || (this.isCharsCode);
   }
 
-  private setStateForInput(input: HTMLInputElement, state: InputState): void {
+  private setStateForInput(input: HTMLInputElement, state: CodeInputState): void {
     const index = this._inputs.indexOf(input);
     if (index < 0) {
       return;
@@ -497,7 +497,7 @@ export class FsCodeInputComponent
     this._inputsStates[index] = state;
   }
 
-  private getStateForInput(input: HTMLInputElement): InputState | undefined {
+  private getStateForInput(input: HTMLInputElement): CodeInputState | undefined {
     const index = this._inputs.indexOf(input);
     return this._inputsStates[index];
   }
