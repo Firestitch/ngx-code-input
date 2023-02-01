@@ -75,6 +75,7 @@ export class FsCodeInputComponent
 
   @Output('changed')
   public readonly codeChanged = new EventEmitter<string>();
+  
   @Output('completed')
   public readonly codeCompleted = new EventEmitter<string>();
 
@@ -92,7 +93,7 @@ export class FsCodeInputComponent
   private _codeLength !: number;
   private _state = {
     isFocusingAfterAppearingCompleted: false,
-    isInitialFocusFieldEnabled: false
+    isInitialFocusFieldEnabled: true
   };
   private _destroy$ = new Subject();
 
@@ -185,6 +186,10 @@ export class FsCodeInputComponent
     this._inputs[index].focus();
   }
 
+  public onFocus(event: FocusEvent): void {
+    (event.target as any).select();
+  }
+
   public onClick(e: any): void {
     // handle click events only if the the prop is enabled
     if (!this.isFocusingOnLastByClickIfFilled) {
@@ -238,7 +243,6 @@ export class FsCodeInputComponent
 
     const next = i + values.length;
     if (next > this._codeLength - 1) {
-      target.blur();
       return;
     }
 
@@ -326,7 +330,7 @@ export class FsCodeInputComponent
     this.isCharsCode  = config.isCharsCode ?? false;
     this.isCodeHidden = config.isCodeHidden ?? false;
     this.autocapitalize = config.autocapitalize;
-    this.initialFocusField = config.initialFocusField;
+    this.initialFocusField = config.initialFocusField ?? 0;
     this.isPrevFocusableAfterClearing = config.isPrevFocusableAfterClearing ?? true;
     this.isFocusingOnLastByClickIfFilled = config.isFocusingOnLastByClickIfFilled ?? false;
   }
