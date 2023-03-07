@@ -45,6 +45,7 @@
     "@firestitch/autocomplete-chips": "^12.4.1",
     "@firestitch/clear": "^12.2.1",
     "@firestitch/common": "^12.5.1",
+    "@firestitch/component-tools": "^12.0.8",
     "@firestitch/core": "^12.0.3",
     "@firestitch/date": "^12.4.1",
     "@firestitch/datepicker": "^12.10.0",
@@ -75,8 +76,7 @@
     "tslint": "~6.1.0",
     "typescript": "4.2.4",
     "url-polyfill": "^1.1.7",
-    "zone.js": "~0.11.4",
-    "@firestitch/component-tools": "^12.0.6"
+    "zone.js": "~0.11.4"
   },
   "engines": {
     "node": ">=6.0.0"
