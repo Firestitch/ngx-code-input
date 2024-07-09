@@ -1,25 +1,24 @@
 import {
-  Component,
-  ChangeDetectionStrategy,
-  Input,
-  Output,
-  EventEmitter,
-  OnInit,
-  OnDestroy,
-  AfterViewInit,
-  OnChanges,
   AfterViewChecked,
-  ViewChildren,
-  QueryList,
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
   ElementRef,
+  EventEmitter,
   Inject,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
   Optional,
+  Output,
+  QueryList,
   SimpleChanges,
+  ViewChildren,
 } from '@angular/core';
-
 import {
-  NG_VALUE_ACCESSOR,
   ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
 } from '@angular/forms';
 
 import { Subject, Subscription } from 'rxjs';
@@ -36,12 +35,12 @@ import { FsCodeInputConfigToken } from '../../tokens/code-input-config.token';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-     useExisting: FsCodeInputComponent,
-     multi: true,
-   }]
+    useExisting: FsCodeInputComponent,
+    multi: true,
+  }],
 })
 export class FsCodeInputComponent
-  implements AfterViewInit, OnInit, OnChanges, OnDestroy, AfterViewChecked, ControlValueAccessor {
+implements AfterViewInit, OnInit, OnChanges, OnDestroy, AfterViewChecked, ControlValueAccessor {
 
   @Input()
   public codeLength: number;
@@ -78,14 +77,17 @@ export class FsCodeInputComponent
   
   @Output('completed')
   public readonly codeCompleted = new EventEmitter<string>();
+  
+  @Output()
+  public readonly completedLast = new EventEmitter<string>();
 
   @ViewChildren('input')
   public inputsList !: QueryList<ElementRef>;
 
   public placeholders: number[] = [];
 
-  private _onChange: any = (value) => {}
-  private _onTouch: any = () => {}
+  private _onChange: (value) => void;
+  private _onTouch: () => void;
   private _code = null;
   private _inputs: HTMLInputElement[] = [];
   private _inputsStates: CodeInputState[] = [];
@@ -93,14 +95,14 @@ export class FsCodeInputComponent
   private _codeLength !: number;
   private _state = {
     isFocusingAfterAppearingCompleted: false,
-    isInitialFocusFieldEnabled: true
+    isInitialFocusFieldEnabled: true,
   };
   private _destroy$ = new Subject();
 
   constructor(
     @Optional()
     @Inject(FsCodeInputConfigToken)
-    config?: CodeInputConfig
+      config?: CodeInputConfig,
   ) {
     this._initWithConfig(config || {});
   }
@@ -166,7 +168,7 @@ export class FsCodeInputComponent
 
     if (this._state.isInitialFocusFieldEnabled) {
       // tslint:disable-next-line:no-non-null-assertion
-      this.focusOnField(this.initialFocusField!);
+      this.focusOnField(this.initialFocusField);
     }
 
     if (isChangesEmitting) {
@@ -227,6 +229,7 @@ export class FsCodeInputComponent
       e.stopPropagation();
       this.setInputValue(target, null);
       this.setStateForInput(target, CodeInputState.reset);
+
       return;
     }
 
@@ -243,6 +246,11 @@ export class FsCodeInputComponent
 
     const next = i + values.length;
     if (next > this._codeLength - 1) {
+      const code = this.getCurrentFilledCode();
+      if (code.length >= this._codeLength) {
+        this.completedLast.emit(code);
+      }
+
       return;
     }
 
@@ -262,7 +270,7 @@ export class FsCodeInputComponent
 
     // Convert paste text into iterable
     // tslint:disable-next-line:no-non-null-assertion
-    const values = data!.split('');
+    const values = data.split('');
     let valIndex = 0;
 
     for (let j = i; j < this._inputs.length; j++) {
@@ -278,6 +286,7 @@ export class FsCodeInputComponent
       if (!this.canInputValue(val)) {
         this.setInputValue(input, null);
         this.setStateForInput(input, CodeInputState.reset);
+
         return;
       }
 
@@ -289,14 +298,15 @@ export class FsCodeInputComponent
     this.emitChanges();
   }
 
-  public async onKeydown(e: any, i: number): Promise<void> {
+  public async onKeydown(e: any, index: number): Promise<void> {
     const target = e.target;
     const isTargetEmpty = this.isEmpty(target.value);
-    const prev = i - 1;
+    const prev = index - 1;
 
     // processing only the backspace and delete key events
     const isBackspaceKey = await this.isBackspaceKey(e);
     const isDeleteKey = this.isDeleteKey(e);
+    
     if (!isBackspaceKey && !isDeleteKey) {
       return;
     }
@@ -318,16 +328,21 @@ export class FsCodeInputComponent
     }
   }
 
-  public registerOnChange(_) { this._onChange = _; }
-  public registerOnTouched(_) {}
+  public registerOnChange(_) {
+    this._onChange = _; 
+  }
+
+  public registerOnTouched(_) {
+    this._onTouch = _; 
+  }
 
   private _initWithConfig(config: CodeInputConfig) {
-    this._code         = config.code;
-    this.disabled     = config.disabled ?? false;
-    this.codeLength   = config.codeLength ?? 6;
-    this.inputType    = config.inputType ?? 'tel';
-    this.inputMode    = config.inputMode ?? 'numeric';
-    this.isCharsCode  = config.isCharsCode ?? false;
+    this._code = config.code;
+    this.disabled = config.disabled ?? false;
+    this.codeLength = config.codeLength ?? 6;
+    this.inputType = config.inputType ?? 'tel';
+    this.inputMode = config.inputMode ?? 'numeric';
+    this.isCharsCode = config.isCharsCode ?? false;
     this.isCodeHidden = config.isCodeHidden ?? false;
     this.autocapitalize = config.autocapitalize;
     this.initialFocusField = config.initialFocusField ?? 0;
@@ -344,11 +359,12 @@ export class FsCodeInputComponent
       this._inputs.forEach((input: HTMLInputElement) => {
         this.setInputValue(input, null);
       });
+
       return;
     }
 
     // tslint:disable-next-line:no-non-null-assertion
-    const chars = this.code!.toString().trim().split('');
+    const chars = this.code.toString().trim().split('');
     // checking if all the values are correct
     let isAllCharsAreAllowed = true;
     for (const char of chars) {
@@ -373,8 +389,7 @@ export class FsCodeInputComponent
     if (this._codeLength > this.placeholders.length) {
       const numbers = Array(this._codeLength - this.placeholders.length).fill(1);
       this.placeholders.splice(this.placeholders.length - 1, 0, ...numbers);
-    }
-    else if (this._codeLength < this.placeholders.length) {
+    } else if (this._codeLength < this.placeholders.length) {
       this.placeholders.splice(this._codeLength);
     }
   }
@@ -382,11 +397,10 @@ export class FsCodeInputComponent
   private onInputsListChanges(list: QueryList<ElementRef>): void {
     if (list.length > this._inputs.length) {
       const inputsToAdd = list.filter((item, index) => index > this._inputs.length - 1);
-      this._inputs.splice(this._inputs.length, 0, ...inputsToAdd.map(item => item.nativeElement));
+      this._inputs.splice(this._inputs.length, 0, ...inputsToAdd.map((item) => item.nativeElement));
       const states = Array(inputsToAdd.length).fill(CodeInputState.ready);
       this._inputsStates.splice(this._inputsStates.length, 0, ...states);
-    }
-    else if (list.length < this._inputs.length) {
+    } else if (list.length < this._inputs.length) {
       this._inputs.splice(list.length);
       this._inputsStates.splice(list.length);
     }
@@ -405,9 +419,9 @@ export class FsCodeInputComponent
     }
 
     // tslint:disable-next-line:no-non-null-assertion
-    this.focusOnField(this.initialFocusField!);
+    this.focusOnField(this.initialFocusField);
     // tslint:disable-next-line:no-non-null-assertion
-    this._state.isFocusingAfterAppearingCompleted = document.activeElement === this._inputs[this.initialFocusField!];
+    this._state.isFocusingAfterAppearingCompleted = document.activeElement === this._inputs[this.initialFocusField];
   }
 
   private emitChanges(): void {
@@ -473,13 +487,12 @@ export class FsCodeInputComponent
       input.value = '';
       input.classList.remove(valueClassCSS);
       // tslint:disable-next-line:no-non-null-assertion
-      input.parentElement!.classList.add(emptyClassCSS);
-    }
-    else {
+      input.parentElement.classList.add(emptyClassCSS);
+    } else {
       input.value = value;
       input.classList.add(valueClassCSS);
       // tslint:disable-next-line:no-non-null-assertion
-      input.parentElement!.classList.remove(emptyClassCSS);
+      input.parentElement.classList.remove(emptyClassCSS);
     }
   }
 
@@ -489,6 +502,7 @@ export class FsCodeInputComponent
     }
 
     const isDigitsValue = /^[0-9]+$/.test(value.toString());
+
     return isDigitsValue || (this.isCharsCode);
   }
 
@@ -503,6 +517,7 @@ export class FsCodeInputComponent
 
   private getStateForInput(input: HTMLInputElement): CodeInputState | undefined {
     const index = this._inputs.indexOf(input);
+
     return this._inputsStates[index];
   }
 

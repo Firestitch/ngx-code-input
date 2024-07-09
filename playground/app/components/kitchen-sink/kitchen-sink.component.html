@@ -2,7 +2,8 @@
   [(ngModel)]="code"
   name="code"
   (ngModelChange)="changed($event)"
-  (completed)="completed($event)">
+  (completed)="completed($event)"
+  (completedLast)="completedLast($event)">
 </fs-code-input>
 
 <ng-container *ngIf="code">
