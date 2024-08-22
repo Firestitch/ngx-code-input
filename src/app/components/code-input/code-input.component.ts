@@ -84,6 +84,7 @@ implements AfterViewInit, OnInit, OnChanges, OnDestroy, AfterViewChecked, Contro
   @ViewChildren('input')
   public inputsList !: QueryList<ElementRef>;
 
+  public focusIndex: number;
   public placeholders: number[] = [];
 
   private _onChange: (value) => void;
@@ -188,8 +189,13 @@ implements AfterViewInit, OnInit, OnChanges, OnDestroy, AfterViewChecked, Contro
     this._inputs[index].focus();
   }
 
-  public onFocus(event: FocusEvent): void {
-    (event.target as any).select();
+  public onFocus(event: FocusEvent, index): void {
+    (event.target as any).focus();
+    this.focusIndex = index;
+  }
+
+  public onBlur(): void {
+    this.focusIndex = null;
   }
 
   public onClick(e: any): void {

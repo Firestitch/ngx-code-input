@@ -1,11 +1,13 @@
 <span 
     *ngFor="let holder of placeholders; index as i"
-    [class.code-hidden]="isCodeHidden">
+    [class.code-hidden]="isCodeHidden"
+    [class.focus]="i === focusIndex">
   <input 
     #input
     (click)="onClick($event)"
     (paste)="onPaste($event, i)"
-    (focus)="onFocus($event)"
+    (focus)="onFocus($event, i)"
+    (blur)="onBlur()"
     (input)="onInput($event, i)"
     (keydown)="onKeydown($event, i)"
     [type]="inputType"
