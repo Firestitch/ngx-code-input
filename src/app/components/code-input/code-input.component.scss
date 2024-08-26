@@ -20,7 +20,7 @@
   color: var(--color);
   justify-content: center;
 
-  span {
+  .input {
     display: flex;
     margin-right: var(--item-spacing);
     border: 1px solid #E7E7E7;
@@ -29,6 +29,7 @@
     width: 45px;
     height: 45px;
     box-sizing: border-box;
+    background-color: #fff;
 
     &:first-child {
       padding-left: 0;

@@ -1,5 +1,6 @@
 <span 
     *ngFor="let holder of placeholders; index as i"
+    class="input"
     [class.code-hidden]="isCodeHidden"
     [class.focus]="i === focusIndex">
   <input 
