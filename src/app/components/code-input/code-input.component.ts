@@ -147,7 +147,7 @@ implements AfterViewInit, OnInit, OnChanges, OnDestroy, AfterViewChecked, Contro
       this._inputsListSubscription.unsubscribe();
     }
 
-    this._destroy$.next();
+    this._destroy$.next(null);
     this._destroy$.complete();
   }
 
