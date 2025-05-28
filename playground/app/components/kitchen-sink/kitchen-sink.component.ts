@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { FsExampleComponent } from '@firestitch/example';
 import { FsMessage } from '@firestitch/message';
 
 import { of } from 'rxjs';
@@ -18,7 +17,6 @@ export class KitchenSinkComponent {
   public code: any = '';
 
   constructor(
-    private exampleComponent: FsExampleComponent,
     private _message: FsMessage,
   ) {
   }
@@ -42,10 +40,10 @@ export class KitchenSinkComponent {
   }
 
   public completed(code) {
-    console.log('Completed', code);
+    this._message.success(`Code completed: ${code}`);
   }
 
   public completedLast(code) {
-    console.log('Completed Last', code);
+    this._message.success(`Code completed last: ${code}`);
   }
 }

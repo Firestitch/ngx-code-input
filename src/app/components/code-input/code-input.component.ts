@@ -72,11 +72,11 @@ implements AfterViewInit, OnInit, OnChanges, OnDestroy, AfterViewChecked, Contro
   @Input()
   public autocapitalize ?: string;
 
-  @Output('changed')
-  public readonly codeChanged = new EventEmitter<string>();
+  @Output()
+  public readonly changed = new EventEmitter<string>();
   
-  @Output('completed')
-  public readonly codeCompleted = new EventEmitter<string>();
+  @Output()
+  public readonly completed = new EventEmitter<string>();
   
   @Output()
   public readonly completedLast = new EventEmitter<string>();
@@ -437,11 +437,11 @@ implements AfterViewInit, OnInit, OnChanges, OnDestroy, AfterViewChecked, Contro
   private emitCode(): void {
     const code = this.getCurrentFilledCode();
 
-    this.codeChanged.emit(code);
+    this.changed.emit(code);
     this._onChange(code);
 
     if (code.length >= this._codeLength) {
-      this.codeCompleted.emit(code);
+      this.completed.emit(code);
     }
   }
 
