@@ -1,19 +1,20 @@
-<span 
-    *ngFor="let holder of placeholders; index as i"
+@for (holder of placeholders; track holder; let i = $index) {
+  <span
     class="input"
     [class.code-hidden]="isCodeHidden"
     [class.focus]="i === focusIndex">
-  <input 
-    #input
-    (click)="onClick($event)"
-    (paste)="onPaste($event, i)"
-    (focus)="onFocus($event, i)"
-    (blur)="onBlur()"
-    (input)="onInput($event, i)"
-    (keydown)="onKeydown($event, i)"
-    [type]="inputType"
-    [disabled]="disabled"
-    [attr.inputmode]="inputMode"
-    [attr.autocapitalize]="autocapitalize"
-    [autocomplete]="'off'"/>
-</span>
+    <input
+      #input
+      (click)="onClick($event)"
+      (paste)="onPaste($event, i)"
+      (focus)="onFocus($event, i)"
+      (blur)="onBlur()"
+      (input)="onInput($event, i)"
+      (keydown)="onKeydown($event, i)"
+      [type]="inputType"
+      [disabled]="disabled"
+      [attr.inputmode]="inputMode"
+      [attr.autocapitalize]="autocapitalize"
+      [autocomplete]="'off'"/>
+  </span>
+}

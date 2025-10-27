@@ -5,13 +5,13 @@
   (completed)="completed($event)"
   (completedLast)="completedLast($event)">
 </fs-code-input>
-<ng-container *ngIf="code">
+@if (code) {
   <br>
-  <br>
-  <fieldset>
-    <legend>
-      Code
-    </legend>
-    {{ code }}
-  </fieldset>
-</ng-container>
+    <br>
+      <fieldset>
+        <legend>
+          Code
+        </legend>
+        {{ code }}
+      </fieldset>
+    }
