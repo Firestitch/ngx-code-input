@@ -1,21 +1,4 @@
-import {
-  AfterViewChecked,
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Inject,
-  Input,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  Optional,
-  Output,
-  QueryList,
-  SimpleChanges,
-  ViewChildren,
-} from '@angular/core';
+import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, QueryList, SimpleChanges, ViewChildren, inject } from '@angular/core';
 import {
   ControlValueAccessor,
   NG_VALUE_ACCESSOR,
@@ -101,11 +84,9 @@ implements AfterViewInit, OnInit, OnChanges, OnDestroy, AfterViewChecked, Contro
   };
   private _destroy$ = new Subject();
 
-  constructor(
-    @Optional()
-    @Inject(FsCodeInputConfigToken)
-      config?: CodeInputConfig,
-  ) {
+  constructor() {
+    const config = inject<CodeInputConfig>(FsCodeInputConfigToken, { optional: true });
+
     this._initWithConfig(config || {});
   }
 

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { FsMessage } from '@firestitch/message';
 
@@ -17,13 +17,10 @@ import { FormsModule } from '@angular/forms';
     imports: [FsCodeInputComponent, FormsModule],
 })
 export class KitchenSinkComponent {
+  private _message = inject(FsMessage);
+
 
   public code: any = '';
-
-  constructor(
-    private _message: FsMessage,
-  ) {
-  }
 
   public open = (event) => {
     console.log(event);
