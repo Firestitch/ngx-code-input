@@ -4,13 +4,17 @@ import { FsMessage } from '@firestitch/message';
 
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { FsCodeInputComponent } from '../../../../src/app/components/code-input/code-input.component';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
-  selector: 'kitchen-sink',
-  templateUrl: './kitchen-sink.component.html',
-  styleUrls: ['./kitchen-sink.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'kitchen-sink',
+    templateUrl: './kitchen-sink.component.html',
+    styleUrls: ['./kitchen-sink.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [FsCodeInputComponent, FormsModule],
 })
 export class KitchenSinkComponent {
 

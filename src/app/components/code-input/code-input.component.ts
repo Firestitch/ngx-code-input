@@ -29,15 +29,16 @@ import { FsCodeInputConfigToken } from '../../tokens/code-input-config.token';
 
 
 @Component({
-  selector: 'fs-code-input',
-  templateUrl: './code-input.component.html',
-  styleUrls: ['./code-input.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: FsCodeInputComponent,
-    multi: true,
-  }],
+    selector: 'fs-code-input',
+    templateUrl: './code-input.component.html',
+    styleUrls: ['./code-input.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [{
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: FsCodeInputComponent,
+            multi: true,
+        }],
+    standalone: true,
 })
 export class FsCodeInputComponent
 implements AfterViewInit, OnInit, OnChanges, OnDestroy, AfterViewChecked, ControlValueAccessor {

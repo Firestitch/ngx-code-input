@@ -1,4 +1,4 @@
-export { FsCodeInputModule } from './app/fs-code-input.module';
+
 
 export { FsCodeInputComponent } from './app/components/code-input/code-input.component';
 export { CodeInputState } from './app/enum/code-input-state';
